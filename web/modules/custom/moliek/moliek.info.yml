@@ -1,0 +1,7 @@
+name: moliek
+description: This module creates a page with a list of cats and a form where users can leave photos of their pets
+package: Custom
+
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
