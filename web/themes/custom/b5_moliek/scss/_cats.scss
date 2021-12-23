@@ -1,0 +1,15 @@
+.path-moliek{
+  .page-title{
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .block{
+    &-system{
+      &-main-block{
+        color: coral;
+        font-size: 26px;
+        text-align: center;
+      }
+    }
+  }
+}
