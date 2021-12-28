@@ -8,3 +8,8 @@
 // Include bootstrap.
 @import '../../../../themes/contrib/bootstrap5/scss/style';
 @import "cats";
+
+pre {
+  font-size: 12px;
+  text-align: left;
+}

@@ -42,12 +42,19 @@ class CatForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
+    $val = $form_state->getValue('cat_name');
+    if (strlen($val) < 2 || strlen($val) > 32) {
+      $form_state->setErrorByName('cat_name',
+        $this->t("Cat name should be in the range of 2 and 32 symbols")
+      );
+    }
   }
 
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $this->messenger()->addStatus($this->t('Сat added successfully'));
   }
 
 }

@@ -1,4 +1,4 @@
-example.content:
+moliek.content:
   path: "/moliek/cats"
   defaults:
     _title: 'Hello Cats!'

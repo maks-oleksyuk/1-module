@@ -4,6 +4,9 @@ namespace Drupal\moliek\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 
+/**
+ * Provides route responses for the Example module.
+ */
 class PageController extends ControllerBase {
 
   /**

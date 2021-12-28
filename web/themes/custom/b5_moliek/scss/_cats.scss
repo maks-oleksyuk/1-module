@@ -13,18 +13,16 @@
     }
   }
 
-  .form {
-    &--add-cat {
+  form {
+    display: flex;
+    align-items: center;
+
+    .form-item-cat-name {
       display: flex;
-      align-items: center;
+      flex-basis: 100%;
 
-      .form-item-cat-name {
-        display: flex;
-        flex-basis: 100%;
-
-        > label {
-          flex-shrink: 0;
-        }
+      > label {
+        flex-shrink: 0;
       }
     }
   }
