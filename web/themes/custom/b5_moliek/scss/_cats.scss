@@ -1,14 +1,30 @@
-.path-moliek{
-  .page-title{
+.path-moliek {
+  .page-title {
     font-weight: bold;
     text-transform: uppercase;
   }
-  .block{
-    &-system{
-      &-main-block{
-        color: coral;
+
+  .block {
+    &-system {
+      &-main-block {
         font-size: 26px;
         text-align: center;
+      }
+    }
+  }
+
+  .form {
+    &--add-cat {
+      display: flex;
+      align-items: center;
+
+      .form-item-cat-name {
+        display: flex;
+        flex-basis: 100%;
+
+        > label {
+          flex-shrink: 0;
+        }
       }
     }
   }

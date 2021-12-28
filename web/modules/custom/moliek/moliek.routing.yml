@@ -1,7 +1,8 @@
 example.content:
   path: "/moliek/cats"
   defaults:
-    _title: "Hello Cats!"
+    _title: 'Hello Cats!'
+    _form: '\Drupal\moliek\Form\CatForm'
     _controller: '\Drupal\moliek\Controller\PageController::build'
   requirements:
     _permission: "access content"
