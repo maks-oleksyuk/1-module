@@ -10221,6 +10221,12 @@ code {
       -ms-flex-negative: 0;
           flex-shrink: 0; }
 
+.site-slogan {
+  text-align: center; }
+
+.region-content {
+  padding-top: 10px; }
+
 pre {
   font-size: 12px;
   text-align: left; }

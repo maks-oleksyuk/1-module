@@ -9,6 +9,17 @@
 @import '../../../../themes/contrib/bootstrap5/scss/style';
 @import "cats";
 
+.site-slogan {
+  text-align: center;
+}
+
+.region {
+  &-content {
+    padding-top: 10px;
+  }
+}
+
+
 pre {
   font-size: 12px;
   text-align: left;
