@@ -15,15 +15,23 @@
 
   form {
     display: flex;
-    align-items: center;
+    flex-direction: column;
 
-    .form-item-cat-name {
+    .form-item {
       display: flex;
+      margin: 5px 0;
       flex-basis: 100%;
 
       > label {
+        min-width: 300px;
         flex-shrink: 0;
+        text-align: end;
       }
+    }
+
+    #edit-submit {
+      max-width: 100px;
+      margin-left: auto;
     }
   }
 }

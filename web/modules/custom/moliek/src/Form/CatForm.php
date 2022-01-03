@@ -6,10 +6,9 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\MessageCommand;
-use Drupal\Core\Messenger\Messenger;
 
 /**
- * Implements an example form.
+ * Implements an add cat form.
  */
 class CatForm extends FormBase {
 
@@ -32,15 +31,30 @@ class CatForm extends FormBase {
       '#title' => $this->t('Your cat’s name:'),
       '#placeholder' => $this->t("should be in the range of 2 and 32 symbols"),
     ];
+    $form['email'] = [
+      '#type' => 'email',
+      '#required' => TRUE,
+      '#title_display' => 'before',
+      '#title' => $this->t('Your email:'),
+      '#placeholder' => $this->t("username@domain.com Only latin characters, -, _"),
+      '#ajax' => [
+        'event' => 'keyup',
+        'callback' => '::emailValidator',
+        'progress' => 'none',
+      ],
+      '#attached' => [
+        'library' => [
+          'moliek/ajax-patch',
+        ],
+      ],
+    ];
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t("Add cat"),
       '#ajax' => [
         'event' => 'click',
         'callback' => '::myAjax',
-        'progress' => [
-          'message' => NULL,
-        ],
+        'progress' => 'none',
       ],
     ];
     return $form;
@@ -73,6 +87,22 @@ class CatForm extends FormBase {
       $response->addCommand(new MessageCommand(t('Your cat added successfully.')));
     }
     $this->messenger()->deleteAll();
+    return $response;
+  }
+
+  /**
+   * Validating for email field.
+   */
+  public function emailValidator(array &$form, FormStateInterface $form_state) {
+    $response = new AjaxResponse();
+    $input = $form_state->getValue('email');
+    $regex = '/^[A-Za-z_\-]+@\w+(?:\.\w+)+$/';
+    if (preg_match($regex, $input)) {
+      $response->addCommand(new MessageCommand(t('Email valid')));
+    }
+    else {
+      $response->addCommand(new MessageCommand(t('E-mail name can only contain latin characters, hyphens and underscores.'), NULL, ['type' => 'error']));
+    }
     return $response;
   }
 

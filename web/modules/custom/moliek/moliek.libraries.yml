@@ -1,0 +1,4 @@
+ajax-patch:
+  version: 1.x
+  js:
+    js/ajax-prototype-beforeSend-patch.js: { }
