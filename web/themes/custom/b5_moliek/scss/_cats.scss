@@ -18,20 +18,75 @@
     flex-direction: column;
 
     .form-item {
-      display: flex;
       margin: 5px 0;
+      display: flex;
       flex-basis: 100%;
+      flex-direction: row;
 
       > label {
-        min-width: 300px;
+        padding: 0;
         flex-shrink: 0;
         text-align: end;
+        min-width: 250px;
+      }
+
+      > div {
+        padding: 0;
+        display: flex;
+        font-size: 14px;
+        align-items: center;
+        justify-content: start;
+
+        > .button {
+          font-size: 12px;
+          padding: 3px 8px;
+        }
+
       }
     }
 
-    #edit-submit {
-      max-width: 100px;
-      margin-left: auto;
+    #edit {
+      &-img {
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+
+        &-upload {
+          font-size: 14px;
+        }
+      }
+
+      &-submit {
+        max-width: 100px;
+        margin-left: auto;
+      }
+    }
+
+    .alert {
+      padding: 10px;
+      font-size: 14px;
+      text-align: start;
+    }
+
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .path-moliek {
+    form {
+      .form-item {
+        flex-wrap: wrap;
+
+        > label {
+          font-size: 18px;
+          text-align: start;
+        }
+
+        > input {
+          font-size: 14px;
+        }
+      }
     }
   }
 }
