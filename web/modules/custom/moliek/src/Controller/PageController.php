@@ -16,16 +16,10 @@ class PageController extends ControllerBase {
   public function build() {
     $form = \Drupal::formBuilder()
       ->getForm('Drupal\moliek\Form\CatForm');
-    $build['content'] = [
-      '#form' => $form,
-      '#theme' => 'moliek_theme',
-      '#text' => $this
-        ->t('Hello! You can add here a photo of your cat.'),
-    ];
     $header_title = [
+      'img' => t('Photo'),
       'name' => t('Name'),
       'email' => t('Email'),
-      'img' => t('Photo'),
       'created' => t('Date Created'),
     ];
     $cats['table'] = [
@@ -33,7 +27,14 @@ class PageController extends ControllerBase {
       '#header' => $header_title,
       '#rows' => $this->getCats(),
     ];
-    return [$form, $cats];
+    $build['content'] = [
+      '#form' => $form,
+      '#theme' => 'moliek_theme',
+      '#text' => $this->t('Hello! You can add here a photo of your cat.'),
+      '#cats' => $cats,
+    ];
+    return $build;
+    //    return [$form, $cats];
   }
 
   /**
@@ -48,9 +49,9 @@ class PageController extends ControllerBase {
     $cats = [];
     foreach ($result as $cat) {
       $cats[] = [
+        'img' => File::load($cat->cat_img)->getFileUri(),
         'name' => $cat->cat_name,
         'email' => $cat->email,
-        'img' => File::load($cat->cat_img)->getFileUri(),
         'created' => $cat->created,
       ];
     }

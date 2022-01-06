@@ -1,0 +1,49 @@
+<p>{{ text }}</p>
+
+{{ form }}
+{{ cats }}
+
+{# <pre> #}
+{#   {{ dump(cats['table']['#rows']) }} #}
+{# </pre> #}
+
+<table{{ attributes.addClass('table') }}>
+	{% if cats['table']['#header'] %}
+		<thead>
+		<tr>
+			{% for cell in cats['table']['#header'] %}
+				<td>{{ cell }}</td>
+			{% endfor %}
+		</tr>
+		</thead>
+	{% endif %}
+
+	{% if cats['table']['#rows'] %}
+		<tbody>
+		{% for row in cats['table']['#rows'] %}
+			{% set row_classes = [
+				not no_striping ? cycle(['odd', 'even'], loop.index0),
+			] %}
+			<tr{{ row.attributes.addClass(row_classes) }}>
+				{#            <img src=""> #}
+
+				{#                {{ row['img'] }} #}
+
+				{#            {% for cell in row.cells %} #}
+				{#                <{{ cell.tag }}{{ cell.attributes }}> #}
+				{#                {{- cell.content -}} #}
+				{#                </{{ cell.tag }}> #}
+				{#            {% endfor %} #}
+			</tr>
+		{% endfor %}
+		</tbody>
+	{% endif %}
+
+	{#    {% elseif empty %} #}
+	{#        <tbody> #}
+	{#        <tr class="odd"> #}
+	{#            <td colspan="{{ header_columns }}" class="empty message">{{ empty }}</td> #}
+	{#        </tr> #}
+	{#        </tbody> #}
+	{#    {% endif %} #}
+</table>

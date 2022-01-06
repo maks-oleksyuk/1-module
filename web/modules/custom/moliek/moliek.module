@@ -8,6 +8,7 @@ function moliek_theme($existing, $type, $theme, $path) {
       'variables' => [
         'text' => NULL,
         'form' => NULL,
+        'cats' => NULL,
       ],
     ],
   ];

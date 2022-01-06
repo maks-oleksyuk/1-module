@@ -144,9 +144,9 @@ class CatForm extends FormBase {
     $file->save();
     $database->insert('moliek')
       ->fields([
+        'cat_img' => $picture[0],
         'cat_name' => $form_state->getValue('cat_name'),
         'email' => $form_state->getValue('email'),
-        'cat_img' => $picture[0],
         'created' => time(),
       ])
       ->execute();
