@@ -2,9 +2,11 @@
 
 namespace Drupal\moliek\Form;
 
+use Drupal\file\Entity\File;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\RemoveCommand;
 use Drupal\Core\Ajax\MessageCommand;
 
 /**
@@ -36,6 +38,7 @@ class CatForm extends FormBase {
       '#required' => TRUE,
       '#title_display' => 'before',
       '#title' => $this->t('Your email:'),
+      '#suffix' => '<div class="email-massage"></div>',
       '#placeholder' => $this->t("username@domain.com Only latin characters, -, _"),
       '#ajax' => [
         'event' => 'keyup',
@@ -64,7 +67,7 @@ class CatForm extends FormBase {
       '#value' => $this->t("Add cat"),
       '#ajax' => [
         'event' => 'click',
-        'callback' => '::myAjax',
+        'callback' => '::submitAjax',
         'progress' => 'none',
       ],
     ];
@@ -72,30 +75,23 @@ class CatForm extends FormBase {
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    $val = $form_state->getValue('cat_name');
-    if (strlen($val) < 2 || strlen($val) > 32) {
-      $form_state->setErrorByName('cat_name',
-        $this->t("Cat name should be in the range of 2 and 32 symbols")
-      );
-    }
-  }
-
-  /**
    * Setting the message in our form.
    */
-  public function myAjax(array &$form, FormStateInterface $form_state) {
+  public function submitAjax(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
     if ($form_state->getErrors()) {
       foreach ($form_state->getErrors() as $err) {
-        $response->addCommand(new MessageCommand($err, NULL, ['type' => 'error']));
+        $response->addCommand(new MessageCommand(
+          $err, NULL, ['type' => 'error']));
       }
       $form_state->clearErrors();
     }
     else {
-      $response->addCommand(new MessageCommand(t('Your cat added successfully.')));
+      $response->addCommand(new MessageCommand(
+        $this->t('Your cat added successfully.'),
+        NULL,
+        ['type' => 'status'],
+        TRUE));
     }
     $this->messenger()->deleteAll();
     return $response;
@@ -109,10 +105,17 @@ class CatForm extends FormBase {
     $input = $form_state->getValue('email');
     $regex = '/^[A-Za-z_\-]+@\w+(?:\.\w+)+$/';
     if (preg_match($regex, $input)) {
-      $response->addCommand(new MessageCommand(t('Email valid')));
+      $response->addCommand(new MessageCommand(
+        $this->t('Email valid'),
+        '.email-massage'));
     }
     else {
-      $response->addCommand(new MessageCommand(t('E-mail name can only contain latin characters, hyphens and underscores.'), NULL, ['type' => 'error']));
+      $response->addCommand(new MessageCommand(
+        $this->t('E-mail name can only contain latin characters, hyphens and underscores.'),
+        '.email-massage', ['type' => 'error']));
+    }
+    if (empty($input)) {
+      $response->addCommand(new RemoveCommand('.email-massage .messages--error'));
     }
     return $response;
   }
@@ -120,7 +123,34 @@ class CatForm extends FormBase {
   /**
    * {@inheritdoc}
    */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    $val = $form_state->getValue('cat_name');
+    if (strlen($val) < 2 || strlen($val) > 32) {
+      $form_state->setErrorByName(
+        'cat_name',
+        $this->t("Cat name should be in the range of 2 and 32 symbols")
+      );
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $database = \Drupal::database();
+    $picture = $form_state->getValue('img');
+    $file = File::load($picture[0]);
+    $file->setPermanent();
+    $file->save();
+    $database->insert('moliek')
+      ->fields([
+        'cat_name' => $form_state->getValue('cat_name'),
+        'email' => $form_state->getValue('email'),
+        'cat_img' => $picture[0],
+        'created' => time(),
+      ])
+      ->execute();
+    $this->messenger()->addMessage($this->t("Cat add to table"), 'status');
   }
 
 }

@@ -10200,10 +10200,6 @@ code {
   font-weight: bold;
   text-transform: uppercase; }
 
-.path-moliek .block-system-main-block {
-  font-size: 26px;
-  text-align: center; }
-
 .path-moliek form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -10213,67 +10209,46 @@ code {
       -ms-flex-direction: column;
           flex-direction: column; }
   .path-moliek form .form-item {
+    gap: 10px;
     margin: 5px 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-preferred-size: 100%;
-        flex-basis: 100%;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row; }
+    padding-bottom: 9px; }
     .path-moliek form .form-item > label {
-      padding: 0;
-      -ms-flex-negative: 0;
-          flex-shrink: 0;
-      text-align: end;
-      min-width: 250px; }
+      padding: 0 10px;
+      font-size: 20px; }
     .path-moliek form .form-item > div {
+      gap: 25px;
       padding: 0;
+      font-size: 14px;
+      margin-left: 10px;
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
-      font-size: 14px;
       -webkit-box-align: center;
           -ms-flex-align: center;
               align-items: center;
       -webkit-box-pack: start;
           -ms-flex-pack: start;
-              justify-content: start; }
+              justify-content: start;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: reverse;
+          -ms-flex-direction: row-reverse;
+              flex-direction: row-reverse; }
       .path-moliek form .form-item > div > .button {
         font-size: 12px;
         padding: 3px 8px; }
-  .path-moliek form #edit-img {
-    padding: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: left;
-        -ms-flex-pack: left;
-            justify-content: left; }
-    .path-moliek form #edit-img-upload {
-      font-size: 14px; }
+  .path-moliek form .email-massage {
+    font-size: 14px;
+    margin-left: 8px; }
   .path-moliek form #edit-submit {
     max-width: 100px;
     margin-left: auto; }
   .path-moliek form .alert {
     padding: 10px;
-    font-size: 14px;
-    text-align: start; }
+    font-size: 14px; }
 
-@media (max-width: 767.98px) {
-  .path-moliek form .form-item {
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap; }
-    .path-moliek form .form-item > label {
-      font-size: 18px;
-      text-align: start; }
-    .path-moliek form .form-item > input {
-      font-size: 14px; } }
+.path-moliek thead {
+  font-size: 18px;
+  text-align: center; }
 
 .site-slogan {
   text-align: center; }

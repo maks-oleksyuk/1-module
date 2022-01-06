@@ -4,38 +4,29 @@
     text-transform: uppercase;
   }
 
-  .block {
-    &-system {
-      &-main-block {
-        font-size: 26px;
-        text-align: center;
-      }
-    }
-  }
-
   form {
     display: flex;
     flex-direction: column;
 
     .form-item {
+      gap: 10px;
       margin: 5px 0;
-      display: flex;
-      flex-basis: 100%;
-      flex-direction: row;
+      padding-bottom: 9px;
 
       > label {
-        padding: 0;
-        flex-shrink: 0;
-        text-align: end;
-        min-width: 250px;
+        padding: 0 10px;
+        font-size: 20px;
       }
 
       > div {
+        gap: 25px;
         padding: 0;
-        display: flex;
         font-size: 14px;
+        margin-left: 10px;
+        display: flex;
         align-items: center;
         justify-content: start;
+        flex-direction: row-reverse;
 
         > .button {
           font-size: 12px;
@@ -45,18 +36,12 @@
       }
     }
 
+    .email-massage {
+      font-size: 14px;
+      margin-left: 8px;
+    }
+
     #edit {
-      &-img {
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: left;
-
-        &-upload {
-          font-size: 14px;
-        }
-      }
-
       &-submit {
         max-width: 100px;
         margin-left: auto;
@@ -66,27 +51,12 @@
     .alert {
       padding: 10px;
       font-size: 14px;
-      text-align: start;
     }
 
   }
-}
 
-@include media-breakpoint-down(md) {
-  .path-moliek {
-    form {
-      .form-item {
-        flex-wrap: wrap;
-
-        > label {
-          font-size: 18px;
-          text-align: start;
-        }
-
-        > input {
-          font-size: 14px;
-        }
-      }
-    }
+  thead {
+    font-size: 18px;
+    text-align: center;
   }
 }
