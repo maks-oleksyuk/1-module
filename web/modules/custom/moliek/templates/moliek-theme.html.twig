@@ -1,49 +1,37 @@
-<p>{{ text }}</p>
+<p class="text-align-center">{{ text }}</p>
 
 {{ form }}
-{{ cats }}
 
-{# <pre> #}
-{#   {{ dump(cats['table']['#rows']) }} #}
-{# </pre> #}
+<div style="overflow: scroll;">
+  <table{{ attributes.addClass('table') }}>
+	  {% if cats['table']['#header'] %}
+		  <thead>
+		  <tr>
+        {% for cell in cats['table']['#header'] %}
+          <td>{{ cell }}</td>
+        {% endfor %}
+      </tr>
+      </thead>
+    {% endif %}
 
-<table{{ attributes.addClass('table') }}>
-	{% if cats['table']['#header'] %}
-		<thead>
-		<tr>
-			{% for cell in cats['table']['#header'] %}
-				<td>{{ cell }}</td>
-			{% endfor %}
-		</tr>
-		</thead>
-	{% endif %}
-
-	{% if cats['table']['#rows'] %}
-		<tbody>
-		{% for row in cats['table']['#rows'] %}
-			{% set row_classes = [
-				not no_striping ? cycle(['odd', 'even'], loop.index0),
-			] %}
-			<tr{{ row.attributes.addClass(row_classes) }}>
-				{#            <img src=""> #}
-
-				{#                {{ row['img'] }} #}
-
-				{#            {% for cell in row.cells %} #}
-				{#                <{{ cell.tag }}{{ cell.attributes }}> #}
-				{#                {{- cell.content -}} #}
-				{#                </{{ cell.tag }}> #}
-				{#            {% endfor %} #}
-			</tr>
-		{% endfor %}
-		</tbody>
-	{% endif %}
-
-	{#    {% elseif empty %} #}
-	{#        <tbody> #}
-	{#        <tr class="odd"> #}
-	{#            <td colspan="{{ header_columns }}" class="empty message">{{ empty }}</td> #}
-	{#        </tr> #}
-	{#        </tbody> #}
-	{#    {% endif %} #}
-</table>
+    {% if cats['table']['#rows'] %}
+      <tbody>
+      {% for row in cats['table']['#rows'] %}
+        {% set row_classes = [
+          not no_striping ? cycle(['odd', 'even'], loop.index0),
+        ] %}
+        <tr{{ row.attributes.addClass(row_classes) }}>
+          <td>
+            <div class="fix-size">
+            <a href="{{row['img'] }}" target="_blank"><img class="cat-image" src="{{row['img'] }}" alt="{{ row['name'] }}" title="{{ row['name'] }}"/></a>
+            </div>
+          </td>
+          <td>{{ row['name']}} </td>
+          <td>{{ row['email'] }}</td>
+          <td>{{ row['created']|date("d/m/y h:m:s") }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    {% endif %}
+  </table>
+</div>

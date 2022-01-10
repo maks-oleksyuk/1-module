@@ -10241,7 +10241,7 @@ code {
     margin-left: 8px; }
   .path-moliek form #edit-submit {
     max-width: 100px;
-    margin-left: auto; }
+    margin: 10px 10px 10px auto; }
   .path-moliek form .alert {
     padding: 10px;
     font-size: 14px; }
@@ -10250,6 +10250,23 @@ code {
   font-size: 18px;
   font-weight: bold;
   text-align: center; }
+
+.path-moliek tbody td {
+  text-align: center;
+  vertical-align: middle; }
+  .path-moliek tbody td:first-child {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  .path-moliek tbody td .fix-size {
+    width: 250px;
+    height: 150px; }
+    .path-moliek tbody td .fix-size .cat-image {
+      width: auto;
+      height: 100%; }
 
 .site-slogan {
   text-align: center; }

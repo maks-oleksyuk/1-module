@@ -35,3 +35,6 @@ fin init-site
 echo -e "${green_bg} DONE! ${NC}${green} Completed all initialization steps.${NC}"
 
 #-------------------------- END: Execution --------------------------------
+
+fin hosts add local.site
+fin db import database.sql

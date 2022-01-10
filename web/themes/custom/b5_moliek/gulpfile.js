@@ -47,7 +47,7 @@ function watchFiles() {
 
 function browser_Sync(params) {
   browserSync.init({
-    proxy: "local.site"
+    proxy: "d9.docksal"
   });
 }
 
