@@ -6,3 +6,12 @@ moliek.content:
     _controller: '\Drupal\moliek\Controller\PageController::build'
   requirements:
     _permission: "access content"
+
+moliek.catDelete:
+  path: '/moliek/cats/{id}/delete'
+  defaults:
+    _form: '\Drupal\moliek\Form\DeleteCat'
+  requirements:
+    _permission: 'administer'
+    id: ^\d+$
+

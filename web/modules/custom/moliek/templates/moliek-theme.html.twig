@@ -2,6 +2,10 @@
 
 {{ form }}
 
+{#<pre>#}
+{#  {{ dump(user.getroles) }}#}
+{#</pre>#}
+
 <div style="overflow: scroll;">
   <table{{ attributes.addClass('table') }}>
 	  {% if cats['table']['#header'] %}
@@ -10,6 +14,9 @@
         {% for cell in cats['table']['#header'] %}
           <td>{{ cell }}</td>
         {% endfor %}
+        {% if 'administrator' in user.getroles %}
+          <td>Options</td>
+        {% endif %}
       </tr>
       </thead>
     {% endif %}
@@ -23,12 +30,24 @@
         <tr{{ row.attributes.addClass(row_classes) }}>
           <td>
             <div class="fix-size">
-            <a href="{{row['img'] }}" target="_blank"><img class="cat-image" src="{{row['img'] }}" alt="{{ row['name'] }}" title="{{ row['name'] }}"/></a>
+              <a href="{{row['img'] }}" target="_blank"><img class="cat-image" src="{{row['img'] }}" alt="{{ row['name'] }}" title="{{ row['name'] }}"/></a>
             </div>
           </td>
           <td>{{ row['name']}} </td>
           <td>{{ row['email'] }}</td>
-          <td>{{ row['created']|date("d/m/y h:m:s") }}</td>
+          <td>{{ row['created']|date("d/m/y H:m:s", '+02:00 GMT') }}</td>
+          {% if 'administrator' in user.getroles %}
+            <td>
+              <div class="administer-links">
+                <a class="use-ajax delete" href="{{ path('moliek.catDelete', {'id': row['id']}) }}" data-dialog-type="modal">
+                  Delete
+                </a>
+                <button class="use-ajax edit" data-dialog-type="modal">
+                  Edit
+                </button>
+              </div>
+            </td>
+          {% endif %}
         </tr>
       {% endfor %}
       </tbody>

@@ -1,8 +1,11 @@
 <?php
+
+use Drupal\Core\Form\FormStateInterface;
+
 /**
  * Implements hook_theme().
  */
-function moliek_theme($existing, $type, $theme, $path) {
+function moliek_theme($existing, $type, $theme, $path): array {
   return [
     'moliek_theme' => [
       'variables' => [
@@ -14,3 +17,9 @@ function moliek_theme($existing, $type, $theme, $path) {
   ];
 }
 
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function moliek_form_moliek_CatForm_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['#attached']['library'][] = 'moliek/ajax-patch';
+}

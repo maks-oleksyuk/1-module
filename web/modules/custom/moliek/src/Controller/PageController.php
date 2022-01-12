@@ -26,6 +26,7 @@ class PageController extends ControllerBase {
       '#type' => 'table',
       '#header' => $header_title,
       '#rows' => $this->getCats(),
+      '#empty' => $this->t('There are no items to display.')
     ];
     $build['content'] = [
       '#form' => $form,
@@ -42,12 +43,13 @@ class PageController extends ControllerBase {
   public function getCats() {
     $database = \Drupal::database();
     $result = $database->select('moliek', 'm')
-      ->fields('m', ['cat_name', 'email', 'cat_img', 'created'])
+      ->fields('m', ['id', 'cat_name', 'email', 'cat_img', 'created'])
       ->orderBy('created', 'DESC')
       ->execute();
     $cats = [];
     foreach ($result as $cat) {
       $cats[] = [
+        'id' => $cat->id,
         'img' => File::load($cat->cat_img)->createFileUrl(),
         'name' => $cat->cat_name,
         'email' => $cat->email,
