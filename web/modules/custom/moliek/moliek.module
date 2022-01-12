@@ -16,10 +16,3 @@ function moliek_theme($existing, $type, $theme, $path): array {
     ],
   ];
 }
-
-/**
- * Implements hook_form_FORM_ID_alter().
- */
-function moliek_form_moliek_CatForm_alter(&$form, FormStateInterface $form_state, $form_id) {
-  $form['#attached']['library'][] = 'moliek/ajax-patch';
-}

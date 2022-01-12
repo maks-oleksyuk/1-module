@@ -76,8 +76,22 @@
         height: 150px;
 
         .cat-image{
-          width: auto;
+          width: 100%;
           height: 100%;
+        }
+      }
+
+      .option-links{
+        gap: 15px;
+        display: flex;
+        flex-direction: column;
+
+        .ajax-progress-throbber {
+          display: none;
+        }
+
+        >button{
+          margin: 0;
         }
       }
     }

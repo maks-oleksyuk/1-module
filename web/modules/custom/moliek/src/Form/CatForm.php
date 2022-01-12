@@ -77,7 +77,7 @@ class CatForm extends FormBase {
   /**
    * Setting the message in our form.
    */
-  public function submitAjax(array &$form, FormStateInterface $form_state) {
+  public function submitAjax(array &$form, FormStateInterface $form_state): AjaxResponse {
     $response = new AjaxResponse();
     if ($form_state->getErrors()) {
       foreach ($form_state->getErrors() as $err) {

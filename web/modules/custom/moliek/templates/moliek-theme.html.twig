@@ -2,55 +2,65 @@
 
 {{ form }}
 
-{#<pre>#}
-{#  {{ dump(user.getroles) }}#}
-{#</pre>#}
+{% if cats['table']['#rows'] %}
+  <div style="overflow: scroll; max-height: 700px;">
+    <table{{ attributes.addClass('table') }}>
+      {% if cats['table']['#header'] %}
+        <thead>
+          <tr>
+            {% for cell in cats['table']['#header'] %}
+              <td>{{ cell }}</td>
+            {% endfor %}
+            {% if 'administrator' in user.getroles %}
+              <td>Options</td>
+            {% endif %}
+          </tr>
+        </thead>
+      {% endif %}
 
-<div style="overflow: scroll;">
-  <table{{ attributes.addClass('table') }}>
-	  {% if cats['table']['#header'] %}
-		  <thead>
-		  <tr>
-        {% for cell in cats['table']['#header'] %}
-          <td>{{ cell }}</td>
-        {% endfor %}
-        {% if 'administrator' in user.getroles %}
-          <td>Options</td>
-        {% endif %}
-      </tr>
-      </thead>
-    {% endif %}
-
-    {% if cats['table']['#rows'] %}
       <tbody>
-      {% for row in cats['table']['#rows'] %}
-        {% set row_classes = [
-          not no_striping ? cycle(['odd', 'even'], loop.index0),
-        ] %}
-        <tr{{ row.attributes.addClass(row_classes) }}>
-          <td>
-            <div class="fix-size">
-              <a href="{{row['img'] }}" target="_blank"><img class="cat-image" src="{{row['img'] }}" alt="{{ row['name'] }}" title="{{ row['name'] }}"/></a>
-            </div>
-          </td>
-          <td>{{ row['name']}} </td>
-          <td>{{ row['email'] }}</td>
-          <td>{{ row['created']|date("d/m/y H:m:s", '+02:00 GMT') }}</td>
-          {% if 'administrator' in user.getroles %}
+        {% for row in cats['table']['#rows'] %}
+          {% set row_classes = [
+            not no_striping ? cycle(['odd', 'even'], loop.index0),
+          ] %}
+          <tr{{ row.attributes.addClass(row_classes) }}>
             <td>
-              <div class="administer-links">
-                <a class="use-ajax delete" href="{{ path('moliek.catDelete', {'id': row['id']}) }}" data-dialog-type="modal">
-                  Delete
+              <div class="fix-size">
+                <a href="{{row['img'] }}" target="_blank">
+                  <img
+                    class="cat-image"
+                    src="{{row['img'] }}"
+                    alt="{{ row['name'] }}"
+                    title="{{ row['name'] }}"/>
                 </a>
-                <button class="use-ajax edit" data-dialog-type="modal">
-                  Edit
-                </button>
               </div>
             </td>
-          {% endif %}
-        </tr>
-      {% endfor %}
-      </tbody>
-    {% endif %}
-  </table>
-</div>
+            <td>{{ row['name']}} </td>
+            <td>{{ row['email'] }}</td>
+            <td>{{ row['created']|date("d/m/y H:i:s")}}</td>
+            {% if 'administrator' in user.getroles %}
+              <td>
+                <div class="option-links">
+                  <button
+                    type="button"
+                    class="btn btn-danger use-ajax delete"
+                    href="{{ path('moliek.catDelete', {'id': row['id']}) }}"
+                    data-dialog-options="{&quot;width&quot;:400}"
+                    data-dialog-type="modal">
+                    Delete
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-info edit"
+                    disabled>
+                    Edit
+                  </button>
+                </div>
+              </td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+  </div>
+{% endif %}
