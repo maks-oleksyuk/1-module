@@ -10236,7 +10236,9 @@ code {
       .path-moliek form .form-item > div > .button {
         font-size: 12px;
         padding: 3px 8px; }
-  .path-moliek form .email-massage {
+  .path-moliek form .email-massage,
+  .path-moliek form .email-massage-modal,
+  .path-moliek form .error-massage-modal {
     font-size: 14px;
     margin-left: 8px; }
   .path-moliek form #edit-submit {

@@ -17,14 +17,14 @@ class CatForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
+  public function getFormId(): string {
     return 'cat_form';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state): array {
     $form['cat_name'] = [
       '#maxlength' => 32,
       '#required' => TRUE,
@@ -92,6 +92,7 @@ class CatForm extends FormBase {
         NULL,
         ['type' => 'status'],
         TRUE));
+      $form_state->setRebuild(TRUE);
     }
     $this->messenger()->deleteAll();
     return $response;
@@ -100,7 +101,7 @@ class CatForm extends FormBase {
   /**
    * Validating for email field.
    */
-  public function emailValidator(array &$form, FormStateInterface $form_state) {
+  public function emailValidator(array &$form, FormStateInterface $form_state): AjaxResponse {
     $response = new AjaxResponse();
     $input = $form_state->getValue('email');
     $regex = '/^[A-Za-z_\-]+@\w+(?:\.\w+)+$/';

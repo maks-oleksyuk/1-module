@@ -13,7 +13,7 @@ class PageController extends ControllerBase {
   /**
    * Builds the response.
    */
-  public function build() {
+  public function build(): array {
     $form = \Drupal::formBuilder()
       ->getForm('Drupal\moliek\Form\CatForm');
     $header_title = [
@@ -26,7 +26,7 @@ class PageController extends ControllerBase {
       '#type' => 'table',
       '#header' => $header_title,
       '#rows' => $this->getCats(),
-      '#empty' => $this->t('There are no items to display.')
+      '#empty' => $this->t('There are no items to display.'),
     ];
     $build['content'] = [
       '#form' => $form,
@@ -40,7 +40,7 @@ class PageController extends ControllerBase {
   /**
    * Getting data from the moliek table.
    */
-  public function getCats() {
+  public function getCats(): array {
     $database = \Drupal::database();
     $result = $database->select('moliek', 'm')
       ->fields('m', ['id', 'cat_name', 'email', 'cat_img', 'created'])

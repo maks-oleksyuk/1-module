@@ -51,8 +51,10 @@
                   </button>
                   <button
                     type="button"
-                    class="btn btn-info edit"
-                    disabled>
+                    class="btn btn-info use-ajax edit"
+                    href="{{ path('moliek.catEdit', {'id': row['id']}) }}"
+                    data-dialog-options="{&quot;width&quot;:700, &quot;title&quot;:&quot;Edit cat information&quot;}"
+                    data-dialog-type="modal">
                     Edit
                   </button>
                 </div>

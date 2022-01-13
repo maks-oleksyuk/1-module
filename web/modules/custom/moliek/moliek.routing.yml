@@ -1,11 +1,11 @@
 moliek.content:
-  path: "/moliek/cats"
+  path: '/moliek/cats'
   defaults:
     _title: 'Hello Cats!'
     _form: '\Drupal\moliek\Form\CatForm'
     _controller: '\Drupal\moliek\Controller\PageController::build'
   requirements:
-    _permission: "access content"
+    _permission: 'access content'
 
 moliek.catDelete:
   path: '/moliek/cats/{id}/delete'
@@ -13,5 +13,10 @@ moliek.catDelete:
     _form: '\Drupal\moliek\Form\DeleteCat'
   requirements:
     _permission: 'administer'
-    id: ^\d+$
 
+moliek.catEdit:
+  path: '/moliek/cats/{id}/edit'
+  defaults:
+    _form: '\Drupal\moliek\Form\EditCat'
+  requirements:
+    _permission: 'administer'
