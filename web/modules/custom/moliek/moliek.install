@@ -1,4 +1,7 @@
 <?php
+
+use Drupal\file\Entity\File;
+
 /**
  * Implements hook_schema().
  */
@@ -40,4 +43,17 @@ function moliek_schema() {
     'primary key' => ['id'],
   ];
   return $schema;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function moliek_uninstall($is_syncing) {
+  $database = Drupal::database();
+  $result = $database->select('moliek', 'm')
+    ->fields('m', ['cat_img'])
+    ->execute();
+  foreach ($result as $cat) {
+    File::load($cat->cat_img)->delete();
+  }
 }

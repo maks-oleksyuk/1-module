@@ -20,3 +20,11 @@ moliek.catEdit:
     _form: '\Drupal\moliek\Form\EditCat'
   requirements:
     _permission: 'administer'
+
+moliek.adminCats:
+  path: '/admin/structure/cats'
+  defaults:
+    _title: 'Cats list'
+    _form: '\Drupal\moliek\Form\AdminCat'
+  requirements:
+    _permission: 'administer'

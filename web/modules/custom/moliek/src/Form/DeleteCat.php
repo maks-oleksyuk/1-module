@@ -3,6 +3,7 @@
 namespace Drupal\moliek\Form;
 
 use Drupal\Core\Url;
+use Drupal\file\Entity\File;
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -15,7 +16,7 @@ class DeleteCat extends ConfirmFormBase {
    *
    * @var int
    */
-  protected $id;
+  protected int $id;
 
   /**
    * {@inheritdoc}
@@ -30,6 +31,11 @@ class DeleteCat extends ConfirmFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $database = \Drupal::database();
+    $result = $database->select('moliek', 'm')
+      ->fields('m', ['cat_img'])
+      ->condition('id', $this->id)
+      ->execute()->fetch();
+    File::load($result->cat_img)->delete();
     $database->delete('moliek')
       ->condition('id', $this->id)
       ->execute();

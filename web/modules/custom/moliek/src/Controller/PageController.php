@@ -40,7 +40,7 @@ class PageController extends ControllerBase {
   /**
    * Getting data from the moliek table.
    */
-  public function getCats(): array {
+  public static function getCats(): array {
     $database = \Drupal::database();
     $result = $database->select('moliek', 'm')
       ->fields('m', ['id', 'cat_name', 'email', 'cat_img', 'created'])
