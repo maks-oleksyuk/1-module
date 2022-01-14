@@ -110,6 +110,9 @@ class EditCat extends CatForm {
       ->fields($updated)
       ->execute();
     if ($updated['cat_img'] != $this->cat->cat_img) {
+      $file = File::load($updated['cat_img']);
+      $file->setPermanent();
+      $file->save();
       File::load($this->cat->cat_img)->delete();
     }
   }
